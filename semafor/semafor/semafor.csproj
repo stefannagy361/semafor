@@ -202,6 +202,8 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
+    <Content Include="bower_components\underscore\underscore-min.js" />
+    <Content Include="bower_components\underscore\underscore.js" />
     <Content Include="gruntfile.js" />
     <Content Include="index.html" />
     <Content Include="node_modules\bower\lib\commands\cache\clean.js" />
@@ -10616,6 +10618,13 @@
     <TypeScriptCompile Include="node_modules\bower\node_modules\inquirer\node_modules\rx\ts\rx.time-lite.d.ts" />
     <TypeScriptCompile Include="node_modules\bower\node_modules\inquirer\node_modules\rx\ts\rx.time.d.ts" />
     <TypeScriptCompile Include="node_modules\bower\node_modules\inquirer\node_modules\rx\ts\rx.virtualtime.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bower_components\underscore\.bower.json" />
+    <Content Include="bower_components\underscore\bower.json" />
+    <Content Include="bower_components\underscore\LICENSE" />
+    <Content Include="bower_components\underscore\README.md" />
+    <Content Include="bower_components\underscore\underscore-min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

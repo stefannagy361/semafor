@@ -4,11 +4,64 @@
   <title></title>
   <link type="text/css" href="assets/css/main.css" rel="stylesheet" />
   <link type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body class="bggrey">
+  <div class="container-fluid" style="height: 95vh">
+    <div class="row content" style="height: 100%">
+      <div class="col-sm-6" style="height: 100%; overflow:auto">
+        <h1>Notes</h1>
+        <div class="row border" style="height: 90%;">
+          <div class="col-sm-12" id="container" style="height:100%">
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" style="height: 100%; border-left: 1px solid #eee;">
+        <h1>Add a note</h1>
+        <div class="col-sm-7 border">
+          <form role="form" name="addNote" id="addSticky">
+            <div class="control-group form-group">
+              <div class="controls">
+                <br /><br />
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="notename" required data-validation-required-message="You must enter a title" />
+              </div>
+            </div>
+            <div class="control-group form-group">
+              <div class="controls">
+                <label for="content">Content</label>
+                <textarea id="notecontent" class="form-control" maxlength="999" rows="10" cols="100" required style="resize: none;"></textarea>
+              </div>
+            </div>
+            <div id="success"></div>
+            <button type="button" class="btn btn-primary pull-right" id="saveButton" style="margin-bottom:10px">Add note</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="restoreModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Restore</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you want to restore the lights?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="restoreYes" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
-</head>
-<body>
-  
 </body>
 </html>
