@@ -1,11 +1,13 @@
 ﻿(function () {
   var myId;
+  var cId;
 
   function Note(title, content) {
     this.Title = title;
     this.Content = content;
     this.Time = Date().toString();
     this.Id = _.uniqueId();
+    this.LightTime = null;
   };
 
   Note.prototype.CreateNote = function () {
@@ -18,7 +20,6 @@
     panel.style.border = "1px solid grey";
     var heading = document.createElement("div");
     heading.className = "panel-body headingcolor";
-    heading.setAttribute("id", "heading" + this.Id);
     heading.textContent = this.Title;
     var body = document.createElement("div");
     body.className = "panel-body";
@@ -34,13 +35,13 @@
     restorecontainer.className = "restoreContainer";
 
     var restore = document.createElement("span");
-    restore.className = "glyphicon glyphicon-refresh pull-right";
+    restore.className = "glyphicon glyphicon-refresh";
     restore.setAttribute("id", "restore" + this.Id);
     restore.style.position = "absolute";
     restore.style.top = "2%";
     restore.setAttribute("data-toggle", "modal");
     restore.setAttribute("data-target", "#restoreModal");
-    restore.setAttribute("onclick", "getId(this)");
+    restore.addEventListener("click", GetId);
 
     restorecontainer.appendChild(restore);
     body.appendChild(restorecontainer);
@@ -75,48 +76,62 @@
     note.appendChild(panel);
     document.getElementById("container").appendChild(note);
 
-    setTimeout(function () {
-      ChangeLight(note.id, green, yellow, red);
+    note.LightTime = setTimeout(function () {
+      ChangeLight(note, green, yellow, red);
     } , 4000);
   };
 
   var btn = document.getElementById("saveButton");
   btn.addEventListener("click", AddNote);
 
-  function ChangeLight(currentId, light1, light2, light3) {
+  function ChangeLight(note, light1, light2, light3) {
     light1.style.background = "grey";
-    if (light1.id == "green" + currentId) {
+    if (light1.id == "green" + note.id) {
       light2.style.background = "yellow";
-      setTimeout(function () {
-        ChangeLight(currentId, light2, light3, light1);
+      note.LightTime = setTimeout(function () {
+        ChangeLight(note, light2, light3, light1);
       }, 6000);
     }
     else
-      if (light1.id == "yellow" + currentId) {
+      if (light1.id == "yellow" + note.id) {
         light2.style.background = "red";
-        setTimeout(function () {
-          ChangeLight(currentId, light2, light3, light1);
+        note.LightTime = setTimeout(function () {
+          ChangeLight(note, light2, light3, light1);
         }, 10000);
       }
       else
-        if (light1.id == "red" + currentId) {
-          document.getElementById("container").removeChild(document.getElementById(currentId));
+        if (light1.id == "red" + note.id) {
+          document.getElementById("container").removeChild(note);
         }
   };
 
   document.getElementById("restoreYes").onclick = function () {
-    console.log(this.parentElement);
+    var note = document.getElementById(cId);
+    note.parentElement.removeChild(note);
+    document.getElementById("container").appendChild(note);
+    clearTimeout(note.LightTime);
+    TurnLightOff(cId);
+
+    note.LightTime = setTimeout(function () {
+      ChangeLight(note, document.getElementById("green" + cId), document.getElementById("yellow" + cId), document.getElementById("red" + cId));
+    }, 4000);
   };
 
-  function getId(that) {
-    console.log(that);
+  function TurnLightOff(ID) {
+    document.getElementById("red" + ID).style.background = "grey";
+    document.getElementById("yellow" + ID).style.background = "grey";
+    document.getElementById("green" + ID).style.background = "lime";
+  };
+
+  function GetId(e) {
+    cId = e.target.parentElement.parentElement.parentElement.parentElement.id;
+    console.log(cId);
   };
 
   function AddNote() {
     if (CheckNote("notename", "notecontent")) {
       var note = new Note(document.getElementById("notename").value, document.getElementById("notecontent").value);
       note.CreateNote();
-      console.log(note.Time);
       return false;
     }
     return true;
