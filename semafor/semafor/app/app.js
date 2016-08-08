@@ -5,7 +5,6 @@
   function Note(title, content) {
     this.Title = title;
     this.Content = content;
-    this.Time = Date().toString();
     this.Id = _.uniqueId();
     this.LightTime = null;
   };
